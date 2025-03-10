@@ -1,28 +1,27 @@
 "use client";
-
-import { useState } from "react";
 import s from "./Categories.module.scss";
-const carygory = [
-  "Пиццы",
-  "Комбо",
-  "Закуски",
-  "Коктели",
-  "Кофе",
-  "Напитки",
-  "Десерты",
+import { useCategoryStore } from "@/shared/store/categoryStore";
+
+const category = [
+  { id: 1, name: "Пиццы" },
+  { id: 2, name: "Комбо" },
+  { id: 3, name: "Закуски" },
+  { id: 4, name: "Коктели" },
+  { id: 5, name: "Кофе" },
+  { id: 6, name: "Напитки" },
+  { id: 7, name: "Десерты" },
 ];
 
 export const Categories = () => {
-  const [activeCategory, setActiveCategory] = useState(0);
+  const activeId = useCategoryStore((state) => state.activeId);
+  console.log(activeId);
+
   return (
     <div className={s.categories}>
-      {carygory.map((item, index) => (
-        <a key={index} className={s.link}>
-          <button
-            onClick={() => setActiveCategory(index)}
-            className={activeCategory === index ? s.activeButton : s.button}
-          >
-            {item}
+      {category.map((item, index) => (
+        <a key={index} className={s.link} href={`/#${item.name}`}>
+          <button className={activeId === item.id ? s.activeButton : s.button}>
+            {item.name}
           </button>
         </a>
       ))}

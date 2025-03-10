@@ -5,6 +5,13 @@
   font-family: var(--font-nunito), sans-serif;
   font-size: 16px;
 }
+a {
+  text-decoration: none;
+}
 .main {
   min-height: 100vh;
+}
+
+html {
+  scroll-behavior: smooth;
 }

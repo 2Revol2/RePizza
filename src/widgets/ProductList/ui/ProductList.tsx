@@ -1,6 +1,10 @@
+"use client";
 import { Title } from "@/shared/ui/Title/Title";
 import s from "./ProductList.module.scss";
 import { ProductCard } from "@/entities/ui/ProductCard/ProductCard";
+import { useEffect, useRef, useState } from "react";
+import { useIntersection } from "react-use";
+import { useCategoryStore } from "@/shared/store/categoryStore";
 type ProductItem = {
   price: number;
 };
@@ -19,9 +23,25 @@ type ProductListProps = {
   categoryId: number;
 };
 
-export const ProductList = ({ products, title }: ProductListProps) => {
+export const ProductList = ({
+  products,
+  title,
+  categoryId,
+}: ProductListProps) => {
+  const intersectionRef = useRef(null);
+  const intersection = useIntersection(intersectionRef, {
+    threshold: 0.4,
+  });
+  const setActiveCategoryId = useCategoryStore((state) => state.setActiveId);
+
+  useEffect(() => {
+    if (intersection?.isIntersecting) {
+      setActiveCategoryId(categoryId);
+    }
+  }, [categoryId, intersection?.isIntersecting, title]);
+
   return (
-    <div>
+    <div id={title} ref={intersectionRef}>
       <Title Level="h3" size="lg" className={s.title}>
         {title}
       </Title>

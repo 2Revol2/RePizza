@@ -19,7 +19,7 @@ type Product = {
 export const ProductCard = ({ id, name, price, image, desc }: Product) => {
   return (
     <div className={s.card}>
-      <Link href={`/product${id}}`}>
+      <Link href={`/product/${id}}`}>
         <Flex justify="center" align="center" className={s.imageWrapper}>
           <img width={215} height={215} src={image} alt={name} />
         </Flex>

@@ -72,7 +72,7 @@ export default function Home() {
               />
               <ProductList
                 title="Комбо"
-                categoryId={1}
+                categoryId={2}
                 products={[
                   {
                     name: "Додо Бокс",
