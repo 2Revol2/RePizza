@@ -28,7 +28,7 @@ export const ProductList = ({
   title,
   categoryId,
 }: ProductListProps) => {
-  const intersectionRef = useRef(null);
+  const intersectionRef = useRef<HTMLDivElement | null>(null);
   const intersection = useIntersection(intersectionRef, {
     threshold: 0.4,
   });
