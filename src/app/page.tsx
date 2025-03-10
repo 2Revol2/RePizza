@@ -1,95 +1,125 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Container from "@/shared/ui/Container/Container";
+import { Title } from "@/shared/ui/Title/Title";
+import s from "./Home.module.scss";
+import { Topbar } from "@/widgets/Topbar";
+import { Filters } from "@/widgets/Filters/ui/Filters";
+import {Flex } from "antd";
+import { ProductList } from "@/widgets/ProductList/ui/ProductList";
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+    <>
+      <Container className={s.container}>
+        <Title className={s.title} size="lg" Level="h3">
+          Все пиццы
+        </Title>
+      </Container>
+      <Topbar />
+      <Container>
+        <Flex style={{ marginTop: 48 }} gap={60}>
+          {/* фильтры */}
+          <div style={{ width: 250 }}>
+            <Filters />
+          </div>
+          {/* товары */}
+          <div style={{ flex: 1 }}>
+            <Flex vertical gap={64}>
+              <ProductList
+                title="Пиццы"
+                categoryId={1}
+                products={[
+                  {
+                    name: "Чилл Грилл ",
+                    id: 1,
+                    image:
+                      "https://media.dodostatic.net/image/r:292x292/11ef9a30c3246adebecb726548cbede9.avif",
+                    desc: "Цыпленок, маринованные огурчики, красный лук, соус гриль, моцарелла, чеснок, фирменный соус альфредо",
+                    items: [{ price: 500 }],
+                  },
+                  {
+                    name: "Чилл Грилл ",
+                    id: 2,
+                    image:
+                      "https://media.dodostatic.net/image/r:292x292/11ef9a30c3246adebecb726548cbede9.avif",
+                    desc: "Цыпленок, маринованные огурчики, красный лук, соус гриль, моцарелла, чеснок, фирменный соус альфредо",
+                    items: [{ price: 500 }],
+                  },
+                  {
+                    name: "Чилл Грилл ",
+                    id: 3,
+                    image:
+                      "https://media.dodostatic.net/image/r:292x292/11ef9a30c3246adebecb726548cbede9.avif",
+                    desc: "Цыпленок, маринованные огурчики, красный лук, соус гриль, моцарелла, чеснок, фирменный соус альфредо",
+                    items: [{ price: 500 }],
+                  },
+                  {
+                    name: "Чилл Грилл ",
+                    id: 4,
+                    image:
+                      "https://media.dodostatic.net/image/r:292x292/11ef9a30c3246adebecb726548cbede9.avif",
+                    desc: "Цыпленок, маринованные огурчики, красный лук, соус гриль, моцарелла, чеснок, фирменный соус альфредо",
+                    items: [{ price: 500 }],
+                  },
+                  {
+                    name: "Чилл Грилл ",
+                    id: 5,
+                    image:
+                      "https://media.dodostatic.net/image/r:292x292/11ef9a30c3246adebecb726548cbede9.avif",
+                    desc: "Цыпленок, маринованные огурчики, красный лук, соус гриль, моцарелла, чеснок, фирменный соус альфредо",
+                    items: [{ price: 500 }],
+                  },
+                ]}
+              />
+              <ProductList
+                title="Комбо"
+                categoryId={1}
+                products={[
+                  {
+                    name: "Додо Бокс",
+                    id: 1,
+                    image:
+                      "https://media.dodostatic.net/image/r:292x292/11ef7a3e8180cb1aadc5b1b9860df0a2.avif",
+                    desc: "Набор юного космонавта, который легко настроить по вкусу ребенка: две закуски и напиток на выбор. В каждом комбо игрушка, а в нашем приложении игра-компаньон",
+                    items: [{ price: 400 }],
+                  },
+                  {
+                    name: "Додо Бокс",
+                    id: 2,
+                    image:
+                      "https://media.dodostatic.net/image/r:292x292/11ef7a3e8180cb1aadc5b1b9860df0a2.avif",
+                    desc: "Набор юного космонавта, который легко настроить по вкусу ребенка: две закуски и напиток на выбор. В каждом комбо игрушка, а в нашем приложении игра-компаньон",
+                    items: [{ price: 400 }],
+                  },
+                  {
+                    name: "Додо Бокс",
+                    id: 3,
+                    image:
+                      "https://media.dodostatic.net/image/r:292x292/11ef7a3e8180cb1aadc5b1b9860df0a2.avif",
+                    desc: "Набор юного космонавта, который легко настроить по вкусу ребенка: две закуски и напиток на выбор. В каждом комбо игрушка, а в нашем приложении игра-компаньон",
+                    items: [{ price: 400 }],
+                  },
+                  {
+                    name: "Додо Бокс",
+                    id: 4,
+                    image:
+                      "https://media.dodostatic.net/image/r:292x292/11ef7a3e8180cb1aadc5b1b9860df0a2.avif",
+                    desc: "Набор юного космонавта, который легко настроить по вкусу ребенка: две закуски и напиток на выбор. В каждом комбо игрушка, а в нашем приложении игра-компаньон",
+                    items: [{ price: 400 }],
+                  },
+                  {
+                    name: "Додо Бокс",
+                    id: 5,
+                    image:
+                      "https://media.dodostatic.net/image/r:292x292/11ef7a3e8180cb1aadc5b1b9860df0a2.avif",
+                    desc: "Набор юного космонавта, который легко настроить по вкусу ребенка: две закуски и напиток на выбор. В каждом комбо игрушка, а в нашем приложении игра-компаньон",
+                    items: [{ price: 400 }],
+                  },
+                ]}
+              />
+            </Flex>
+          </div>
+        </Flex>
+      </Container>
+    </>
   );
 }
