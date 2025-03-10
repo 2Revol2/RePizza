@@ -2,9 +2,8 @@
 import { Title } from "@/shared/ui/Title/Title";
 import s from "./ProductList.module.scss";
 import { ProductCard } from "@/entities/ui/ProductCard/ProductCard";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useIntersection } from "react-use";
-import { log } from "console";
 import { useCategoryStore } from "@/shared/store/categoryStore";
 type ProductItem = {
   price: number;
