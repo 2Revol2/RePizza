@@ -4,6 +4,7 @@ import s from "./ProductList.module.scss";
 import { ProductCard } from "@/entities/ui/ProductCard/ProductCard";
 import { useEffect, useRef, useState } from "react";
 import { useIntersection } from "react-use";
+import { log } from "console";
 import { useCategoryStore } from "@/shared/store/categoryStore";
 type ProductItem = {
   price: number;
@@ -38,7 +39,7 @@ export const ProductList = ({
     if (intersection?.isIntersecting) {
       setActiveCategoryId(categoryId);
     }
-  }, [categoryId, intersection?.isIntersecting, title]);
+  }, [categoryId, intersection?.isIntersecting, title, setActiveCategoryId]);
 
   return (
     <div id={title} ref={intersectionRef}>
