@@ -14,7 +14,6 @@ const category = [
 
 export const Categories = () => {
   const activeId = useCategoryStore((state) => state.activeId);
-  console.log(activeId);
 
   return (
     <div className={s.categories}>
