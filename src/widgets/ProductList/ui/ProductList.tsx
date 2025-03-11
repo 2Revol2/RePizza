@@ -2,9 +2,9 @@
 import { Title } from "@/shared/ui/Title/Title";
 import s from "./ProductList.module.scss";
 import { ProductCard } from "@/entities/ui/ProductCard/ProductCard";
-import { useEffect, useRef } from "react";
-import { useIntersection } from "react-use";
+import { useEffect } from "react";
 import { useCategoryStore } from "@/shared/store/categoryStore";
+import { useInView } from "react-intersection-observer";
 type ProductItem = {
   price: number;
 };
@@ -28,20 +28,20 @@ export const ProductList = ({
   title,
   categoryId,
 }: ProductListProps) => {
-  const intersectionRef = useRef<HTMLDivElement | null>(null);
-  const intersection = useIntersection(intersectionRef, {
+
+  const setActiveCAtegoryId = useCategoryStore((state) => state.setActiveId);
+  const { ref, inView } = useInView({
     threshold: 0.4,
   });
-  const setActiveCategoryId = useCategoryStore((state) => state.setActiveId);
 
   useEffect(() => {
-    if (intersection?.isIntersecting) {
-      setActiveCategoryId(categoryId);
+    if (inView) {
+      setActiveCAtegoryId(categoryId);
     }
-  }, [categoryId, intersection?.isIntersecting, title, setActiveCategoryId]);
+  }, [inView]);
 
   return (
-    <div id={title} ref={intersectionRef}>
+    <div id={title} ref={ref}>
       <Title Level="h3" size="lg" className={s.title}>
         {title}
       </Title>
