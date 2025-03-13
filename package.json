@@ -2,18 +2,24 @@
   "name": "pizza",
   "version": "0.1.0",
   "private": true,
+  "prisma": {
+    "schema": "src/prisma/schema.prisma"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "husky"
+    "prepare": "husky",
+    "prisma:studio": "prisma studio"
   },
   "dependencies": {
+    "@prisma/client": "^6.4.1",
     "antd": "^5.24.3",
     "classnames": "^2.5.1",
     "lucide-react": "^0.479.0",
     "next": "15.2.1",
+    "prisma": "^6.4.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-intersection-observer": "^9.16.0",

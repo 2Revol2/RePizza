@@ -39,7 +39,7 @@ export const ProductList = ({
       setActiveCAtegoryId(categoryId);
     }
   }, [inView]);
-
+  
   return (
     <div id={title} ref={ref}>
       <Title Level="h3" size="lg" className={s.title}>
