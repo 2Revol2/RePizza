@@ -14,6 +14,7 @@ model User {
     email String @unique
     password String
     role UserRole @default(USER)
+    verified DateTime
 
     provider String?
     providerId String?
@@ -54,18 +55,16 @@ model Product {
 }
 
 model ProductItem {
-    id  Int  @id @default(autoincrement())
-    name String
-    size Int?
-    pizzaType Int?
+    id Int @id @default(autoincrement())
 
-    product Product @relation(fields: [productId], references: [id])
-    productId Int
+    price     Int
+    size      Int?
+    pizzaType Int?
 
     cartItems CartItem[]
 
-    createAt DateTime @default(now())
-    updateAt DateTime @updatedAt
+    product   Product @relation(fields: [productId], references: [id])
+    productId Int
 }
 
 model Ingredient {
