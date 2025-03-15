@@ -33,7 +33,7 @@ export const ProductCard = ({ id, name, price, image, desc }: Product) => {
           </span>
           <Button type="secondary">
             <Plus />
-            Добавить
+            <p> Добавить</p>
           </Button>
         </Flex>
       </Link>

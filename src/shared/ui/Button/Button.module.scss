@@ -13,26 +13,26 @@
 }
 
 .login {
-  border: 0.0625rem solid #fe5f00;
+  border: 0.0625rem solid var(--primary-color);
   background-color: inherit;
-  color: #fe5f00;
+  color: var(--primary-color);
   &:hover {
-    background-color: #ffefe6;
+    background-color: var(--secondary-hover-color);
   }
 }
 
 .default {
-  background-color: #fe5f00;
-  color: #fff;
+  background-color: var(--primary-color);
+  color: var(--secondary-text-color);
   &:hover {
-    background-color: #ff6f1c;
+    background-color: var(--hover-color);
   }
 }
 .secondary {
   background-color: #fffaf4;
-  color: #fe5f00;
-  transition: all .3s ease-in-out;
+  color: var(--primary-color);
+  transition: all 0.3s ease-in-out;
   &:hover {
-    background-color: #faead6;
-  } 
+    background-color: var(--secondary-hover-color);
+  }
 }

@@ -1,19 +1,17 @@
-
-
 .imageWrapper {
-    background-color: #FFF7EE;
-    border-radius: 15px;
-    margin-bottom: 15px;
+  background-color: var(--card-bg-color);
+  border-radius: .9375rem;
+  margin-bottom: .9375rem;
 }
 .desc {
-    color: #B1B1B1;
-    font-size: 14px;
+  color: var(--desc-color);
+  font-size: .875rem;
 }
 
 .price {
-    color: #000000;
-    font-size: 20px;
-    b {
-        font-size: 20px;
-    }
+  color: var(--text-color);
+  font-size: 1.25rem;
+  b {
+    font-size: 1.25rem;
+  }
 }

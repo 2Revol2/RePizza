@@ -1,5 +1,5 @@
 .header {
-  border-bottom: 1px solid #ededed;
+  border-bottom: .0625rem solid #ededed;
 }
 
 .container {
@@ -12,13 +12,13 @@
 }
 
 .name {
-  font-size: 24px;
+  font-size: 1.5rem;
   text-transform: uppercase;
   font-weight: 900;
 }
 .description {
-  font-size: 14px;
-  color: rgba(156, 163, 175, 1);
+  font-size: .875rem;
+  color: var(--desc-color);
 }
 
 .button {
@@ -26,7 +26,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 5px;
+  gap: .3125rem;
   cursor: pointer;
   &:hover {
     .cart {
@@ -36,7 +36,7 @@
     .arrowRight {
       transition: all 0.3s ease-in-out;
       opacity: 100;
-      right: 35px;
+      right: 2.1875rem;
       transform: translateX(50%);
     }
   }
@@ -48,7 +48,7 @@
 
 .divider {
   display: inline-block;
-  height: 24px;
-  width: 1px;
+  height: 1.5rem;
+  width: .0625rem;
   background-color: #ffffff40;
 }

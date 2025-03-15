@@ -1,11 +1,11 @@
 .sort {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    background-color: #fafafa;
-    border-radius: 15px;
-    padding: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background-color: var(--bg-color);
+  border-radius: 0.9375rem;
+  padding: 0.875rem;
 }
 .primaryColor {
-    color: #fe5f00;
+  color: var(--primary-color);
 }

@@ -1,18 +1,19 @@
 import Container from "@/shared/ui/Container/Container";
 import { Title } from "@/shared/ui/Title/Title";
-import s from "./Home.module.scss";
 import { Topbar } from "@/widgets/Topbar";
-import { Filters } from "@/widgets/Filters/ui/Filters";
-import {Flex } from "antd";
-import { ProductList } from "@/widgets/ProductList/ui/ProductList";
+import { Filters } from "@/widgets/Filters";
+import { Flex } from "antd";
+import { ProductList } from "@/widgets/ProductList";
 
 export default function Home() {
   return (
     <>
-      <Container className={s.container}>
-        <Title className={s.title} size="lg" Level="h3">
-          Все пиццы
-        </Title>
+      <Container>
+        <div style={{marginTop: 40}}>
+          <Title size="lg" Level="h3">
+            Все пиццы
+          </Title>
+        </div>
       </Container>
       <Topbar />
       <Container>

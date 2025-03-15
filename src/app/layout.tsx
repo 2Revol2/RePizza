@@ -1,5 +1,6 @@
 import { Nunito } from "next/font/google";
 import "./styles/global.css";
+import "./styles/themes/normal.scss";
 import { Header } from "@/widgets/Header";
 import { ConfigProvider } from "antd";
 import { config } from "./providers/AntdConfig";
