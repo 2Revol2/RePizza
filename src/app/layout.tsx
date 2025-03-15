@@ -3,6 +3,7 @@ import "./styles/global.css";
 import { Header } from "@/widgets/Header";
 import { ConfigProvider } from "antd";
 import { config } from "./providers/AntdConfig";
+import { TanstackProvider } from "./providers/TanstackProvider";
 
 const nunito = Nunito({
   subsets: ["cyrillic"],
@@ -23,10 +24,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={nunito.variable}>
-        <ConfigProvider theme={config}>
-          <Header />
-          <main className="main">{children}</main>
-        </ConfigProvider>
+        <TanstackProvider>
+          <ConfigProvider theme={config}>
+            <Header />
+            <main className="main">{children}</main>
+          </ConfigProvider>
+        </TanstackProvider>
       </body>
     </html>
   );

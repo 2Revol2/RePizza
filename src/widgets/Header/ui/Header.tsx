@@ -4,6 +4,7 @@ import { Flex } from "antd";
 import s from "./Header.module.scss";
 import Button from "@/shared/ui/Button/Button";
 import { ArrowRight, ShoppingCart, User } from "lucide-react";
+import { Search } from "@/features/Search";
 
 export const Header = () => {
   return (
@@ -18,6 +19,10 @@ export const Header = () => {
           </div>
         </Flex>
 
+        {/* Поиск */}
+        <Flex flex={1}>
+          <Search />
+        </Flex>
         {/* Правая часть */}
         <Flex align="center" gap={"12px"}>
           <Button className={s.button} type="login">

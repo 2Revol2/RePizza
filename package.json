@@ -15,8 +15,10 @@
   },
   "dependencies": {
     "@prisma/client": "^6.5.0",
+    "@tanstack/react-query": "^5.68.0",
     "@types/bcrypt": "^5.0.2",
     "antd": "^5.24.3",
+    "axios": "^1.8.3",
     "bcryptjs": "^3.0.2",
     "classnames": "^2.5.1",
     "lucide-react": "^0.479.0",
@@ -24,6 +26,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-intersection-observer": "^9.16.0",
+    "react-use": "^17.6.0",
     "sass": "^1.85.1",
     "zustand": "^5.0.3"
   },

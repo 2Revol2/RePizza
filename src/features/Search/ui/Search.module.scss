@@ -1,0 +1,61 @@
+.wrapper {
+  border-radius: 15px;
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  position: relative;
+  height: 44px;
+  z-index: 30;
+}
+.icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #adadad;
+  left: 12px;
+}
+
+.input {
+  background-color: #f3f3f3;
+  width: 100%;
+  outline: none;
+  border: none;
+  padding-left: 44px;
+  border-radius: 15px;
+}
+.shadow {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  background-color: #00000080;
+}
+.popup {
+  width: 100%;
+  position: absolute;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 4px 0px;
+  top: 56px;
+  opacity: 0;
+  z-index: 30;
+  visibility: hidden;
+  transition: all 0.3s ease-in;
+}
+.openPopup {
+  visibility: visible;
+  opacity: 100;
+  top: 48px;
+}
+.info {
+  transition: all .3s ease-in-out;
+  padding-left: 20px;
+  border-radius: 5px;
+  color: #000000;
+  &:hover {
+    background-color: #ff6f1c;
+    color: #ffffff;
+  }
+}
