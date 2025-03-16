@@ -9,20 +9,25 @@ import { LIMIT } from "@/shared/constants/const";
 import { CheckboxFilter } from "@/features/CheckboxFilter";
 import { DOUGH_TYPE, PIZZA_SIZE } from "@/shared/constants/filters";
 import { PriceFilter } from "@/features/PriceFilter/ui/PriceFilter";
+import { useFiltersStore } from "@/shared/store/filtersStore";
 
 export const Filters = () => {
   const { data, isLoading } = useQuery({
     queryKey: ["search"],
     queryFn: () => getAllIngredients(),
   });
+  const { doughType, size, prices, ingredients } = useFiltersStore();
+
   const [showAll, setShowAll] = useState(false);
   const [searchValue, setSearchValue] = useState("");
 
   const list = showAll
     ? data?.filter((ingredient) =>
-      ingredient.name.toLowerCase().includes(searchValue.toLowerCase())
+        ingredient.name.toLowerCase().includes(searchValue.toLowerCase())
       )
     : data?.slice(0, LIMIT);
+
+  console.log(doughType, size, prices, ingredients);
 
   return (
     <div className={s.filters}>
@@ -36,14 +41,14 @@ export const Filters = () => {
       <Title size="xs" Level="h3">
         Тип теста:
       </Title>
-      <CheckboxFilter items={DOUGH_TYPE} name="Тип" />
+      <CheckboxFilter items={DOUGH_TYPE} type="doughType" />
       <Divider />
 
       {/* размер */}
       <Title size="xs" Level="h3">
         Размер:
       </Title>
-      <CheckboxFilter items={PIZZA_SIZE} name="Размер" />
+      <CheckboxFilter items={PIZZA_SIZE} type="size" />
       <Divider />
 
       {/* цена */}
@@ -79,7 +84,7 @@ export const Filters = () => {
             items={
               list?.map((item) => ({ text: item.name, value: item.id })) || []
             }
-            name="Ингредиенты"
+            type="ingredients"
           />
         )}
       </Flex>

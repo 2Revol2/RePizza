@@ -1,6 +1,6 @@
+import { useFiltersStore } from "@/shared/store/filtersStore";
 import { PriceInput } from "@/shared/ui/PriceInput/PriceInput";
 import { Flex, Slider } from "antd";
-import { useState } from "react";
 
 type PriceProps = {
   priceFrom: number;
@@ -8,14 +8,14 @@ type PriceProps = {
 };
 
 export const PriceFilter = () => {
-  const [prices, setPrices] = useState<PriceProps>({
-    priceFrom: 0,
-    priceTo: 1000,
-  });
+  const setFilters = useFiltersStore((state) => state.setFilters);
+
+  const prices = useFiltersStore((state) => state.prices);
 
   const onChangePrice = (name: keyof PriceProps, value: number) => {
-    setPrices({ ...prices, [name]: value });
+    setFilters({ prices: { ...prices, [name]: value } });
   };
+
   return (
     <>
       <Flex style={{ marginTop: 15 }} gap={15}>
@@ -41,7 +41,9 @@ export const PriceFilter = () => {
         max={1000}
         step={10}
         value={[prices.priceFrom, prices.priceTo]}
-        onChange={([priceFrom, priceTo]) => setPrices({ priceFrom, priceTo })}
+        onChange={([priceFrom, priceTo]) =>
+          setFilters({ prices: { ...prices, priceFrom, priceTo } })
+        }
       />
     </>
   );

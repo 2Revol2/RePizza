@@ -1,15 +1,18 @@
+import { useFiltersStore } from "@/shared/store/filtersStore";
 import { Checkbox, Flex, GetProp } from "antd";
 
 type CheckboxFilterProps = {
   items: { value: number; text: string }[];
-  name: string
+  type: "size" | "ingredients" | "doughType";
 };
 
-export const CheckboxFilter = ({ items, name }: CheckboxFilterProps) => {
+export const CheckboxFilter = ({ items, type }: CheckboxFilterProps) => {
+  const setFilters = useFiltersStore((state) => state.setFilters);
+
   const onChange: GetProp<typeof Checkbox.Group, "onChange"> = (
     checkedValues
   ) => {
-    console.log(`${name}`, checkedValues);
+    setFilters({ [type]: checkedValues });
   };
   return (
     <Flex style={{ marginTop: 10 }} gap={10} vertical>
