@@ -41,7 +41,7 @@ export const ProductList = ({
   }, [inView]);
   
   return (
-    <div id={title} ref={ref}>
+    <section id={title} ref={ref}>
       <Title Level="h3" size="lg" className={s.title}>
         {title}
       </Title>
@@ -57,6 +57,6 @@ export const ProductList = ({
           />
         ))}
       </div>
-    </div>
+    </section>
   );
 };

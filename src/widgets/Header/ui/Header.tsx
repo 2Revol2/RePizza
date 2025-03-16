@@ -5,20 +5,22 @@ import s from "./Header.module.scss";
 import Button from "@/shared/ui/Button/Button";
 import { ArrowRight, ShoppingCart, User } from "lucide-react";
 import { Search } from "@/features/Search";
+import Link from "next/link";
 
 export const Header = () => {
   return (
     <header className={s.header}>
       <Container className={s.container}>
         {/* Левая часть */}
-        <Flex align="center" gap={15}>
-          <Image src={"/logo.svg"} width={35} height={35} alt="logo" />
-          <div>
-            <h1 className={s.name}>RePizza</h1>
-            <p className={s.description}>вкусней уже некуда</p>
-          </div>
-        </Flex>
-
+        <Link href={"/"} legacyBehavior>
+          <Flex style={{ cursor: "pointer" }} align="center" gap={15}>
+            <Image src={"/logo.svg"} width={35} height={35} alt="logo" />
+            <div>
+              <h1 className={s.name}>RePizza</h1>
+              <p className={s.description}>вкусней уже некуда</p>
+            </div>
+          </Flex>
+        </Link>
         {/* Поиск */}
         <Flex flex={1}>
           <Search />
