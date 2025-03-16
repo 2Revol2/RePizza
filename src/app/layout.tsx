@@ -5,7 +5,7 @@ import { Header } from "@/widgets/Header";
 import { ConfigProvider } from "antd";
 import { config } from "./providers/AntdConfig";
 import { TanstackProvider } from "./providers/TanstackProvider";
-
+import '@ant-design/v5-patch-for-react-19';
 const nunito = Nunito({
   subsets: ["cyrillic"],
   weight: ["400", "500", "600", "700", "800", "900"],

@@ -1,5 +1,5 @@
 import { ChangeEventHandler } from "react";
-import s from "./Input.module.scss";
+import s from "./PriceInput.module.scss";
 
 type InputProps = {
   min: number;
@@ -8,7 +8,7 @@ type InputProps = {
   value?: string;
   onChange?: ChangeEventHandler<HTMLInputElement>;
 };
-export const Input = ({
+export const PriceInput = ({
   min,
   max,
   value,

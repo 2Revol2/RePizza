@@ -1,52 +1,28 @@
 "use client";
-
-import { Checkbox, Divider, Flex, Slider } from "antd";
+import { Divider, Flex, Skeleton } from "antd";
 import s from "./Filters.module.scss";
 import { Title } from "@/shared/ui/Title/Title";
-import { Input } from "@/shared/ui/Input/Input";
 import { useState } from "react";
-
-const Ingredients = [
-  {
-    text: "Сырный соус",
-    value: 1,
-  },
-  {
-    text: "Моцарелла",
-    value: 2,
-  },
-  {
-    text: "Чеснок",
-    value: 3,
-  },
-  {
-    text: "Солённые огурчики",
-    value: 4,
-  },
-  {
-    text: "Красный лук",
-    value: 5,
-  },
-  {
-    text: "Томаты",
-    value: 6,
-  },
-];
+import { useQuery } from "@tanstack/react-query";
+import { getAllIngredients } from "@/shared/api/ingredients/api";
+import { LIMIT } from "@/shared/constants/const";
+import { CheckboxFilter } from "@/features/CheckboxFilter";
+import { DOUGH_TYPE, PIZZA_SIZE } from "@/shared/constants/filters";
+import { PriceFilter } from "@/features/PriceFilter/ui/PriceFilter";
 
 export const Filters = () => {
-  const limit = 6;
+  const { data, isLoading } = useQuery({
+    queryKey: ["search"],
+    queryFn: () => getAllIngredients(),
+  });
   const [showAll, setShowAll] = useState(false);
   const [searchValue, setSearchValue] = useState("");
 
   const list = showAll
-    ? Ingredients.filter((item) =>
-        item.text.toLowerCase().includes(searchValue.toLowerCase())
+    ? data?.filter((ingredient) =>
+      ingredient.name.toLowerCase().includes(searchValue.toLowerCase())
       )
-    : Ingredients.slice(0, limit);
-
-  const onChangeSearchInput = (value: string) => {
-    setSearchValue(value);
-  };
+    : data?.slice(0, LIMIT);
 
   return (
     <div className={s.filters}>
@@ -54,21 +30,27 @@ export const Filters = () => {
       <Title size="sm" Level="h3">
         Фильтрация
       </Title>
-      <Flex style={{ marginTop: 30 }} gap={10} vertical>
-        <Checkbox>Можно собирать</Checkbox>
-        <Checkbox>Новинки</Checkbox>
-      </Flex>
+      <Divider />
+
+      {/* тип */}
+      <Title size="xs" Level="h3">
+        Тип теста:
+      </Title>
+      <CheckboxFilter items={DOUGH_TYPE} name="Тип" />
+      <Divider />
+
+      {/* размер */}
+      <Title size="xs" Level="h3">
+        Размер:
+      </Title>
+      <CheckboxFilter items={PIZZA_SIZE} name="Размер" />
       <Divider />
 
       {/* цена */}
       <Title size="xs" Level="h3">
         Цена от и до:
       </Title>
-      <Flex style={{ marginTop: 15 }} gap={15}>
-        <Input min={0} max={1000} placeholder="0" />
-        <Input min={100} max={1000} placeholder="1000" />
-      </Flex>
-      <Slider range defaultValue={[0, 1000]} min={0} max={1000} step={10} />
+      <PriceFilter />
       <Divider />
 
       {/* Ингредиенты */}
@@ -78,15 +60,28 @@ export const Filters = () => {
       <Flex className={s.listWrapper} vertical gap={10}>
         {showAll && (
           <input
-            onChange={(e) => onChangeSearchInput(e.target.value)}
+            onChange={(e) => setSearchValue(e.target.value)}
             type="text"
             placeholder="Поиск..."
             className={s.input}
           />
         )}
-        {list.map((item, index) => (
-          <Checkbox key={index}>{item.text} </Checkbox>
-        ))}
+        {isLoading ? (
+          [...new Array(LIMIT)].map((_, index) => (
+            <Skeleton.Input
+              key={index}
+              active
+              style={{ width: "100%", height: "25px" }}
+            />
+          ))
+        ) : (
+          <CheckboxFilter
+            items={
+              list?.map((item) => ({ text: item.name, value: item.id })) || []
+            }
+            name="Ингредиенты"
+          />
+        )}
       </Flex>
       <button className={s.button} onClick={() => setShowAll(!showAll)}>
         {showAll ? "Скрыть" : "+ Показать всё"}
