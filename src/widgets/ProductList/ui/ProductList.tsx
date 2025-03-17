@@ -5,7 +5,6 @@ import { ProductCard } from "@/entities/ui/ProductCard/ProductCard";
 import { useEffect } from "react";
 import { useCategoryStore } from "@/shared/store/categoryStore";
 import { useInView } from "react-intersection-observer";
-import { Product } from "@prisma/client";
 import { ProductWithRelations } from "@/shared/types/ProductWithRelations";
 
 type ProductListProps = {
