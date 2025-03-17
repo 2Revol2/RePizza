@@ -5,21 +5,12 @@ import { ProductCard } from "@/entities/ui/ProductCard/ProductCard";
 import { useEffect } from "react";
 import { useCategoryStore } from "@/shared/store/categoryStore";
 import { useInView } from "react-intersection-observer";
-type ProductItem = {
-  price: number;
-};
-
-type Product = {
-  id: number;
-  name: string;
-  desc: string;
-  image: string;
-  items: ProductItem[];
-};
+import { Product } from "@prisma/client";
+import { ProductWithRelations } from "@/shared/types/ProductWithRelations";
 
 type ProductListProps = {
   title: string;
-  products: Product[];
+  products: ProductWithRelations[];
   categoryId: number;
 };
 
@@ -28,18 +19,17 @@ export const ProductList = ({
   title,
   categoryId,
 }: ProductListProps) => {
-
   const setActiveCAtegoryId = useCategoryStore((state) => state.setActiveId);
   const { ref, inView } = useInView({
-    threshold: 0.4,
+    threshold: 0.7,
   });
 
   useEffect(() => {
     if (inView) {
       setActiveCAtegoryId(categoryId);
     }
-  }, [inView]);
-  
+  }, [inView, categoryId, title]);
+
   return (
     <section id={title} ref={ref}>
       <Title Level="h3" size="lg" className={s.title}>
@@ -50,9 +40,9 @@ export const ProductList = ({
           <ProductCard
             key={product.id}
             name={product.name}
-            desc={product.desc}
-            image={product.image}
             id={product.id}
+            imageUrl={product.imageUrl}
+            ingredients={product.ingredients}
             price={product.items[0].price}
           />
         ))}

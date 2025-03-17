@@ -1,18 +1,14 @@
 "use client";
+import { Category } from "@prisma/client";
 import s from "./Categories.module.scss";
 import { useCategoryStore } from "@/shared/store/categoryStore";
 
-const category = [
-  { id: 1, name: "Пиццы" },
-  { id: 2, name: "Комбо" },
-  { id: 3, name: "Закуски" },
-  { id: 4, name: "Коктели" },
-  { id: 5, name: "Кофе" },
-  { id: 6, name: "Напитки" },
-  { id: 7, name: "Десерты" },
-];
 
-export const Categories = () => {
+type CategoriesProps = {
+  category: Category[];
+};
+
+export const Categories = ({ category }: CategoriesProps) => {
   const activeId = useCategoryStore((state) => state.activeId);
 
   return (
