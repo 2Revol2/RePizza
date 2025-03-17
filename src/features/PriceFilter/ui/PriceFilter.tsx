@@ -40,7 +40,7 @@ export const PriceFilter = () => {
         min={0}
         max={1000}
         step={10}
-        value={[prices.priceFrom, prices.priceTo]}
+        value={[prices.priceFrom || 0, prices.priceTo || 1000]}
         onChange={([priceFrom, priceTo]) =>
           setFilters({ prices: { ...prices, priceFrom, priceTo } })
         }

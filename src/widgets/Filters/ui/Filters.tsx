@@ -2,24 +2,31 @@
 import { Divider, Flex, Skeleton } from "antd";
 import s from "./Filters.module.scss";
 import { Title } from "@/shared/ui/Title/Title";
-import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getAllIngredients } from "@/shared/api/ingredients/api";
 import { LIMIT } from "@/shared/constants/const";
 import { CheckboxFilter } from "@/features/CheckboxFilter";
 import { DOUGH_TYPE, PIZZA_SIZE } from "@/shared/constants/filters";
-import { PriceFilter } from "@/features/PriceFilter/ui/PriceFilter";
-import { useFiltersStore } from "@/shared/store/filtersStore";
+import { PriceFilter } from "@/features/PriceFilter";
+import Button from "@/shared/ui/Button/Button";
+import { useFiltersLogic } from "@/shared/hooks/useFiltersLogic";
 
 export const Filters = () => {
+  const {
+    showAll,
+    searchValue,
+    doughType,
+    size,
+    ingredients,
+    setSearchValue,
+    resetFilters,
+    setShowAll,
+  } = useFiltersLogic();
+
   const { data, isLoading } = useQuery({
     queryKey: ["search"],
     queryFn: () => getAllIngredients(),
   });
-  const { doughType, size, prices, ingredients } = useFiltersStore();
-
-  const [showAll, setShowAll] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
 
   const list = showAll
     ? data?.filter((ingredient) =>
@@ -27,11 +34,8 @@ export const Filters = () => {
       )
     : data?.slice(0, LIMIT);
 
-  console.log(doughType, size, prices, ingredients);
-
   return (
     <div className={s.filters}>
-      {/* верх */}
       <Title size="sm" Level="h3">
         Фильтрация
       </Title>
@@ -41,14 +45,18 @@ export const Filters = () => {
       <Title size="xs" Level="h3">
         Тип теста:
       </Title>
-      <CheckboxFilter items={DOUGH_TYPE} type="doughType" />
+      <CheckboxFilter
+        items={DOUGH_TYPE}
+        type="doughType"
+        checkedValues={doughType}
+      />
       <Divider />
 
       {/* размер */}
       <Title size="xs" Level="h3">
         Размер:
       </Title>
-      <CheckboxFilter items={PIZZA_SIZE} type="size" />
+      <CheckboxFilter items={PIZZA_SIZE} type="size" checkedValues={size} />
       <Divider />
 
       {/* цена */}
@@ -85,6 +93,7 @@ export const Filters = () => {
               list?.map((item) => ({ text: item.name, value: item.id })) || []
             }
             type="ingredients"
+            checkedValues={ingredients}
           />
         )}
       </Flex>
@@ -92,6 +101,11 @@ export const Filters = () => {
         {showAll ? "Скрыть" : "+ Показать всё"}
       </button>
       <Divider />
+      <Flex justify="center" align="center">
+        <Button buttonType="default" onClick={resetFilters}>
+          Сбросить фильтры
+        </Button>
+      </Flex>
     </div>
   );
 };

@@ -27,7 +27,7 @@ export const Header = () => {
         </Flex>
         {/* Правая часть */}
         <Flex align="center" gap={"12px"}>
-          <Button className={s.button} type="login">
+          <Button className={s.button} buttonType="login">
             <User size={16} />
             Войти
           </Button>

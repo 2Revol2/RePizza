@@ -1,17 +1,18 @@
-import { ReactNode } from "react";
+import { ButtonHTMLAttributes, ReactNode } from "react";
 import s from "./Button.module.scss";
 import classNames from "classnames";
 
-type ButtonProps = {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
-  type?: "login" | "default" | 'secondary';
+  buttonType?: "login" | "default" | 'secondary';
   className?: string;
 };
 
 export default function Button({
   children,
-  type = "default",
+  buttonType = "default",
   className,
+  onClick
 }: ButtonProps) {
-  return <button className={classNames(className, s[type])}>{children}</button>;
+  return <button onClick={onClick} className={classNames(className, s[buttonType])}>{children}</button>;
 }

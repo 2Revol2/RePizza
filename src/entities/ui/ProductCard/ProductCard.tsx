@@ -31,7 +31,7 @@ export const ProductCard = ({ id, name, price, image, desc }: Product) => {
           <span className={s.price}>
             от <b>{price} ₽</b>
           </span>
-          <Button type="secondary">
+          <Button buttonType="secondary">
             <Plus />
             <p> Добавить</p>
           </Button>

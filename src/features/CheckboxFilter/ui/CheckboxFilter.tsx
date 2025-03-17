@@ -4,19 +4,24 @@ import { Checkbox, Flex, GetProp } from "antd";
 type CheckboxFilterProps = {
   items: { value: number; text: string }[];
   type: "size" | "ingredients" | "doughType";
+  checkedValues?: number[];
 };
 
-export const CheckboxFilter = ({ items, type }: CheckboxFilterProps) => {
+export const CheckboxFilter = ({
+  items,
+  type,
+  checkedValues,
+}: CheckboxFilterProps) => {
   const setFilters = useFiltersStore((state) => state.setFilters);
 
   const onChange: GetProp<typeof Checkbox.Group, "onChange"> = (
     checkedValues
   ) => {
-    setFilters({ [type]: checkedValues });
+    setFilters({ [type]: checkedValues});
   };
   return (
     <Flex style={{ marginTop: 10 }} gap={10} vertical>
-      <Checkbox.Group onChange={onChange}>
+      <Checkbox.Group onChange={onChange} value={checkedValues}>
         <Flex vertical gap={10}>
           {items.map((item) => (
             <Checkbox key={item.value} value={item.value}>
