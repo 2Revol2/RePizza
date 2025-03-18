@@ -22,7 +22,7 @@ export const ProductCard = ({
 }: ProductCardProps) => {
   return (
     <article className={s.card}>
-      <Link href={`/product/${id}}`}>
+      <Link href={`/product/${id}`}>
         <Flex justify="center" align="center" className={s.imageWrapper}>
           <img width={215} height={215} src={imageUrl} alt={name} />
         </Flex>

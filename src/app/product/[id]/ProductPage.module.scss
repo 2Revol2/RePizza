@@ -1,0 +1,22 @@
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  margin-top: 40px;
+}
+.info {
+  flex: 1;
+}
+.imageWrapper {
+  padding: 35px;
+  background-color: var(--card-bg-color);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 570px;
+  height: 570px;
+}
+.desc {
+  color: var(--desc-color);
+}

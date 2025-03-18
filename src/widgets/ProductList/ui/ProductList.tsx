@@ -1,7 +1,7 @@
 "use client";
 import { Title } from "@/shared/ui/Title/Title";
 import s from "./ProductList.module.scss";
-import { ProductCard } from "@/entities/ui/ProductCard/ProductCard";
+import { ProductCard } from "@/entities/Product";
 import { useEffect } from "react";
 import { useCategoryStore } from "@/shared/store/categoryStore";
 import { useInView } from "react-intersection-observer";
