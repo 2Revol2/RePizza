@@ -2,7 +2,7 @@ import { prisma } from "@/prisma/prismaClient";
 import Container from "@/shared/ui/Container/Container";
 import { notFound } from "next/navigation";
 import s from "./ProductPage.module.scss";
-import { ProductImage } from "@/entities/Product";
+import { PizzaImage } from "@/entities/Product";
 import { Title } from "@/shared/ui/Title/Title";
 import { PizzaOptions } from "@/features/PizzaOptions";
 
@@ -20,7 +20,7 @@ export default async function ProductPage({
   return (
     <Container className={s.wrapper}>
       <div className={s.imageWrapper}>
-        <ProductImage
+        <PizzaImage
           imageUrl={product.imageUrl}
           size={30}
           name={product.name}
