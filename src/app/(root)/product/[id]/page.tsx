@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import s from "./ProductPage.module.scss";
 import { PizzaImage } from "@/entities/Product";
 import { Title } from "@/shared/ui/Title/Title";
-import { PizzaOptions } from "@/features/PizzaOptions";
 
 export default async function ProductPage({
   params,
@@ -20,25 +19,13 @@ export default async function ProductPage({
   return (
     <Container className={s.wrapper}>
       <div className={s.imageWrapper}>
-        <PizzaImage
-          imageUrl={product.imageUrl}
-          size={30}
-          name={product.name}
-        />
+        <PizzaImage imageUrl={product.imageUrl} size={30} name={product.name} />
       </div>
       <div className={s.info}>
         <Title size="md" Level="h4">
           {product.name}
         </Title>
         <p className={s.desc}>Lorem ipsum dolor sit amet consectetur.</p>
-        <PizzaOptions
-          options={[
-            { value: "20", name: "Маленькая" },
-            { value: "30", name: "Средняя" },
-            { value: "40", name: "Большая", disabled: true },
-          ]}
-          selectedValue={"30"}
-        />
       </div>
     </Container>
   );
