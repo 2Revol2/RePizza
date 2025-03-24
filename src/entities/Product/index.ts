@@ -1,2 +1,2 @@
 export { ProductCard } from "./ui/ProductCard/ProductCard";
-export { ProductImage } from "./ui/ProductImage/ProductImage";
+export { PizzaImage } from "./ui/ProductImage/PizzaImage";

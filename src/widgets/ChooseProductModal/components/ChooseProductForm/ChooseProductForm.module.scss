@@ -1,0 +1,20 @@
+.wrapper {
+  display: flex;
+  flex: 1;
+  height: 500px;
+}
+.info {
+  background-color: #f4f1ee;
+  width: 490px;
+  padding: 40px;
+}
+.imageWrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+.button {
+  width: 100%;
+}

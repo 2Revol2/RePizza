@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import s from "./ProductImage.module.scss";
+import s from './PizzaImage.module.scss'
 
 type ProductImageProps = {
   size: 20 | 30 | 40;
@@ -7,7 +7,7 @@ type ProductImageProps = {
   name: string;
 };
 
-export const ProductImage = ({ size, imageUrl, name }: ProductImageProps) => {
+export const PizzaImage = ({ size, imageUrl, name }: ProductImageProps) => {
   return (
     <div className={s.wrapper}>
       <img
