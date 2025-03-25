@@ -20,6 +20,7 @@ export const ChooseProductModal = ({ product }: ChooseProductModalProps) => {
       open={Boolean(product)}
       footer={null}
       centered
+      className="modal"
       onCancel={() => router.back()}
       width={1000}
       style={{padding: 0, }}

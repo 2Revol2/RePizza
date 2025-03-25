@@ -13,6 +13,8 @@ import {
 } from "@/shared/constants/pizza";
 import { useState } from "react";
 import { Flex } from "antd";
+import { IngredientCard } from "@/entities/Ingredient/ui/IngredientCard";
+import { useSet } from "react-use";
 
 type ChoosePizzaFormProps = {
   product: ProductWithRelations;
@@ -20,9 +22,13 @@ type ChoosePizzaFormProps = {
 export const ChoosePizzaForm = ({ product }: ChoosePizzaFormProps) => {
   const [size, setSize] = useState<PizzaSize>(20);
   const [type, setType] = useState<PizzaType>(1);
+  const [selectedIngredients, { toggle: toogleSelectedIngredients }] = useSet(
+    new Set<number>([])
+  );
 
   const textDetails = "30 см, традиционное тесто 30, ";
   const totalPrice = 300;
+
   return (
     <div className={s.wrapper}>
       <div className={s.imageWrapper}>
@@ -50,9 +56,22 @@ export const ChoosePizzaForm = ({ product }: ChoosePizzaFormProps) => {
             value={type}
             setValue={(value) => setType(value as PizzaType)}
           />
-        </Flex>
 
-        <Button className={s.button}>Добавить в корзину {totalPrice} ₽</Button>
+          <div className={s.ingredientsWrapper}>
+            {product.ingredients.map((item) => (
+              <IngredientCard
+                key={item.id}
+                ingredient={item}
+                active={selectedIngredients.has(item.id)}
+                onClick={() => toogleSelectedIngredients(item.id)}
+              />
+            ))}
+          </div>
+
+          <Button className={s.button}>
+            Добавить в корзину {totalPrice} ₽
+          </Button>
+        </Flex>
       </div>
     </div>
   );

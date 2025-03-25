@@ -1,0 +1,25 @@
+.ingredient {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: .25rem;
+  align-items: center;
+  cursor: pointer;
+  background-color: #ffffff;
+  border-radius: .9375rem;
+  position: relative;
+}
+.active {
+  border: .0625rem solid var(--primary-color);
+}
+.name {
+  text-align: center;
+  font-weight: 600;
+}
+.icon {
+  position: absolute;
+  top: .3125rem;
+  right: .3125rem;
+  color: var(--primary-color);
+}
