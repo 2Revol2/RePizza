@@ -10,8 +10,9 @@ import {
   PizzaSize,
   pizzaTypes,
   PizzaType,
+  mapPizzaType,
 } from "@/shared/constants/pizza";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Flex } from "antd";
 import { IngredientCard } from "@/entities/Ingredient/ui/IngredientCard";
 import { useSet } from "react-use";
@@ -26,8 +27,41 @@ export const ChoosePizzaForm = ({ product }: ChoosePizzaFormProps) => {
     new Set<number>([])
   );
 
-  const textDetails = "30 см, традиционное тесто 30, ";
-  const totalPrice = 300;
+  const textDetails = `${size} см, ${mapPizzaType[type]} тесто пицца`;
+
+  const pizzaPrice =
+    product.items.find((item) => item.size === size && item.pizzaType === type)
+      ?.price || 0;
+
+  const selectedIngredientsPrice = product.ingredients
+    .filter((item) => selectedIngredients.has(item.id))
+    .reduce((acc, item) => {
+      return (acc += item.price);
+    }, 0);
+
+  const totalPrice = pizzaPrice + selectedIngredientsPrice;
+
+  const availablePizza = product.items.filter(
+    (item) => item.pizzaType === type
+  );
+  const availablePizzaSizes = pizzaSizes.map((item) => ({
+    name: item.name,
+    value: item.value,
+    disabled: !availablePizza.some((pizza) => pizza.size === item.value)
+  }));
+
+  const handleAddToCart = () => {
+    console.log({ size, type, selectedIngredients });
+  };
+
+  useEffect(()=>{
+  const currentSize = availablePizzaSizes.find((item) => item.value === size && !item.disabled)
+  const availableSize = availablePizzaSizes.find((item) => !item.disabled)
+
+  if(!currentSize && availableSize) {
+    setSize((availableSize.value) as PizzaSize)
+  }
+  }, [type])
 
   return (
     <div className={s.wrapper}>
@@ -47,7 +81,7 @@ export const ChoosePizzaForm = ({ product }: ChoosePizzaFormProps) => {
           <p className={s.desc}>{textDetails}</p>
 
           <PizzaOptions
-            options={pizzaSizes}
+            options={availablePizzaSizes}
             value={size}
             setValue={(value) => setSize(value as PizzaSize)}
           />
@@ -68,7 +102,7 @@ export const ChoosePizzaForm = ({ product }: ChoosePizzaFormProps) => {
             ))}
           </div>
 
-          <Button className={s.button}>
+          <Button onClick={handleAddToCart} className={s.button}>
             Добавить в корзину {totalPrice} ₽
           </Button>
         </Flex>
