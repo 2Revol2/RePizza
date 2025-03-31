@@ -1,4 +1,3 @@
-"use client";
 import { ProductWithRelations } from "@/shared/types/ProductWithRelations";
 import Button from "@/shared/ui/Button/Button";
 import { Title } from "@/shared/ui/Title/Title";
@@ -6,16 +5,17 @@ import s from "./ChoosePizzaForm.module.scss";
 import { PizzaImage } from "@/entities/Product";
 import { PizzaOptions } from "@/features/PizzaOptions";
 import {
-  pizzaSizes,
   PizzaSize,
   pizzaTypes,
   PizzaType,
   mapPizzaType,
 } from "@/shared/constants/pizza";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Flex } from "antd";
 import { IngredientCard } from "@/entities/Ingredient/ui/IngredientCard";
 import { useSet } from "react-use";
+import { calcTotalPizzaPrice } from "@/shared/lib/calcTotalPizzaPrice";
+import { useAvailablePizzaSizes } from "@/shared/hooks/useAvailablePizzaSizes";
 
 type ChoosePizzaFormProps = {
   product: ProductWithRelations;
@@ -29,39 +29,24 @@ export const ChoosePizzaForm = ({ product }: ChoosePizzaFormProps) => {
 
   const textDetails = `${size} см, ${mapPizzaType[type]} тесто пицца`;
 
-  const pizzaPrice =
-    product.items.find((item) => item.size === size && item.pizzaType === type)
-      ?.price || 0;
-
-  const selectedIngredientsPrice = product.ingredients
-    .filter((item) => selectedIngredients.has(item.id))
-    .reduce((acc, item) => {
-      return (acc += item.price);
-    }, 0);
-
-  const totalPrice = pizzaPrice + selectedIngredientsPrice;
-
-  const availablePizza = product.items.filter(
-    (item) => item.pizzaType === type
+  const totalPrice = calcTotalPizzaPrice(
+    size,
+    type,
+    product.items,
+    product.ingredients,
+    selectedIngredients
   );
-  const availablePizzaSizes = pizzaSizes.map((item) => ({
-    name: item.name,
-    value: item.value,
-    disabled: !availablePizza.some((pizza) => pizza.size === item.value)
-  }));
+
+  const availablePizzaSizes = useAvailablePizzaSizes(
+    type,
+    size,
+    product.items,
+    setSize
+  );
 
   const handleAddToCart = () => {
     console.log({ size, type, selectedIngredients });
   };
-
-  useEffect(()=>{
-  const currentSize = availablePizzaSizes.find((item) => item.value === size && !item.disabled)
-  const availableSize = availablePizzaSizes.find((item) => !item.disabled)
-
-  if(!currentSize && availableSize) {
-    setSize((availableSize.value) as PizzaSize)
-  }
-  }, [type])
 
   return (
     <div className={s.wrapper}>
