@@ -2,7 +2,7 @@
 import Button from "@/shared/ui/Button/Button";
 import s from "./CartButton.module.scss";
 import { Flex } from "antd";
-import { ArrowRight, ShoppingCart, User } from "lucide-react";
+import { ArrowRight, ShoppingCart } from "lucide-react";
 import { useToogleDrawerStore } from "@/shared/store/toogleDrawerStore";
 import { Drawer } from "@/widgets/Drawer";
 
