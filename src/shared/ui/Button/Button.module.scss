@@ -1,4 +1,4 @@
-.login,
+.outline,
 .default,
 .secondary {
   display: flex;
@@ -13,7 +13,7 @@
   cursor: pointer;
 }
 
-.login {
+.outline {
   border: 0.0625rem solid var(--primary-color);
   background-color: inherit;
   color: var(--primary-color);

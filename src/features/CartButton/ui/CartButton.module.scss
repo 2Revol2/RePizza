@@ -1,0 +1,31 @@
+.button {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .3125rem;
+  cursor: pointer;
+  &:hover {
+    .cart {
+      opacity: 0;
+      transition: all 0.3s ease-in-out;
+    }
+    .arrowRight {
+      transition: all 0.3s ease-in-out;
+      opacity: 100;
+      right: 2.1875rem;
+      transform: translateX(50%);
+    }
+  }
+}
+.arrowRight {
+  position: absolute;
+  opacity: 0;
+}
+
+.divider {
+  display: inline-block;
+  height: 1.5rem;
+  width: .0625rem;
+  background-color: #ffffff40;
+}

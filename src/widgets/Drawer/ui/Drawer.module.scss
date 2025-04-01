@@ -1,0 +1,31 @@
+.drawer {
+  background-color: #f4f1ee;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: .625rem;
+  gap: .9375rem;
+}
+.button {
+  width: 100%;
+}
+.priceWrapper {
+  display: flex;
+  width: 100%;
+}
+.price {
+  display: flex;
+  flex: 1;
+  font-size: 1.125rem;
+}
+.divider {
+  flex: 1;
+  border-bottom: .0625rem dashed #dfdfdf;
+  position: relative;
+  top: -0.25rem;
+  margin: 0rem .625rem;
+}

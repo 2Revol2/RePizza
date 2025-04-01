@@ -6,6 +6,7 @@ import { Flex } from "antd";
 import { ProductList } from "@/widgets/ProductList";
 import { prisma } from "@/prisma/prismaClient";
 
+
 export default async function Home() {
   const categories = await prisma.category.findMany({
     include: {

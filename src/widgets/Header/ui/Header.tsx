@@ -2,10 +2,11 @@ import Image from "next/image";
 import Container from "../../../shared/ui/Container/Container";
 import { Flex } from "antd";
 import s from "./Header.module.scss";
-import Button from "@/shared/ui/Button/Button";
-import { ArrowRight, ShoppingCart, User } from "lucide-react";
 import { Search } from "@/features/Search";
 import Link from "next/link";
+import { CartButton } from "@/features/CartButton";
+import Button from "@/shared/ui/Button/Button";
+import { User } from "lucide-react";
 
 export const Header = () => {
   return (
@@ -27,21 +28,11 @@ export const Header = () => {
         </Flex>
         {/* Правая часть */}
         <Flex align="center" gap={"12px"}>
-          <Button className={s.button} buttonType="login">
+          <Button buttonType="outline">
             <User size={16} />
             Войти
           </Button>
-          <div>
-            <Button className={s.button}>
-              <b>520 ₽</b>
-              <span className={s.divider} />
-              <Flex className={s.cart} align="center" gap={8}>
-                <ShoppingCart strokeWidth={2} height={20} width={20} />
-                <b>3</b>
-              </Flex>
-              <ArrowRight width={20} className={s.arrowRight} />
-            </Button>
-          </div>
+          <CartButton />
         </Flex>
       </Container>
     </header>

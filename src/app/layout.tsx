@@ -2,7 +2,6 @@ import { Nunito } from "next/font/google";
 import "./styles/global.css";
 import "./styles/themes/normal.scss";
 
-
 const nunito = Nunito({
   subsets: ["cyrillic"],
   weight: ["400", "500", "600", "700", "800", "900"],
