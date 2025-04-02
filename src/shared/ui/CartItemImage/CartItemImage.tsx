@@ -6,5 +6,5 @@ type CartItemImageProps = {
 };
 
 export const CartItemImage = ({ src, alt }: CartItemImageProps) => {
-  return <img width={35} height={35} className={s.image} src={src} alt={alt} />;
+  return <img width={65} height={65} className={s.image} src={src} alt={alt} />;
 };

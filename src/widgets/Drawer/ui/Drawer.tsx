@@ -5,8 +5,7 @@ import { Drawer as AntdDrawer, Flex } from "antd";
 import Link from "next/link";
 import Button from "@/shared/ui/Button/Button";
 import { ArrowRight } from "lucide-react";
-import { CartItemInfo } from "@/shared/ui/CartItemInfo/CartItemInfo";
-import { CountButton } from "@/shared/ui/CountButton/CountButton";
+import { CartItem } from "@/widgets/CartItem";
 
 export const Drawer = () => {
   const { isActive, setIsActive } = useToogleDrawerStore();
@@ -38,12 +37,14 @@ export const Drawer = () => {
       }
       title="В корзине 4 товара"
     >
-      <CartItemInfo name="Сырная" details="Сыр, овощи" />
-      
-      <Flex align="center" gap={10}>
-        <CountButton type="minus" />
-        <b>1</b>
-        <CountButton type="plus" />
+      <Flex vertical gap={10}>
+        <CartItem
+          imageUrl="https://media.dodostatic.net/image/r:233x233/11EE7D61304FAF5A98A6958F2BB2D260.webp"
+          details="капуста, 30 см, грибы"
+          name="Сырная"
+          price={400}
+          quantity={5}
+        />
       </Flex>
     </AntdDrawer>
   );

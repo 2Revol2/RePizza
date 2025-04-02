@@ -1,0 +1,17 @@
+.cartItem {
+  padding: 1.25rem;
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+  background-color: var(--card-bg-color);
+}
+.divider {
+  height: .0625rem;
+  background-color: #e2e2e2;
+}
+.trashIcon {
+  color: var(--desc-color);
+  cursor: pointer;
+  &:hover {
+    color: rgb(141, 141, 141);
+  }
+}
