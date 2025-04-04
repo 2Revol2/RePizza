@@ -5,7 +5,7 @@ import { Filters } from "@/widgets/Filters";
 import { Flex } from "antd";
 import { ProductList } from "@/widgets/ProductList";
 import { prisma } from "@/prisma/prismaClient";
-
+import { CartDrawer } from "@/widgets/CartDrawer";
 
 export default async function Home() {
   const categories = await prisma.category.findMany({
@@ -57,6 +57,7 @@ export default async function Home() {
           </div>
         </Flex>
       </Container>
+      <CartDrawer />
     </>
   );
 }

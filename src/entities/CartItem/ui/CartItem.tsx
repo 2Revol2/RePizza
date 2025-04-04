@@ -1,6 +1,5 @@
 import { CartItemImage } from "@/shared/ui/CartItemImage/CartItemImage";
 import s from "./CartItem.module.scss";
-
 import { Flex } from "antd";
 import { CartItemInfo } from "@/shared/ui/CartItemInfo/CartItemInfo";
 import { CountButton } from "@/shared/ui/CountButton/CountButton";
