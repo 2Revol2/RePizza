@@ -33,16 +33,16 @@ export const CartDrawer = () => {
         items: DataFromServer.items.map((item) => ({
           id: item.id,
           quantity: item.quantity,
-          name: item.product.product.name,
-          imageUrl: item.product.product.imageUrl,
+          name: item.productItem.product.name,
+          imageUrl: item.productItem.product.imageUrl,
           price: calcTotalCartPrice(
             item.quantity,
             item.ingredients,
-            item.product.price
+            item.productItem.price
           ),
           disabled: false,
-          pizzaSize: item.product.size,
-          pizzaType: item.product.pizzaType,
+          pizzaSize: item.productItem.size,
+          pizzaType: item.productItem.pizzaType,
           ingredients: item.ingredients.map((item) => ({
             name: item.name,
             price: item.price,

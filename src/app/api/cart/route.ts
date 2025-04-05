@@ -18,7 +18,7 @@ export async function GET(req: NextRequest) {
           createAt: "desc",
         },
         include: {
-          product: {
+          productItem: {
             include: {
               product: true,
             },

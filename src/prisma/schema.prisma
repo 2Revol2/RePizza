@@ -103,11 +103,11 @@ model CartItem {
     cart Cart @relation(fields: [cartId], references: [id])
     cartId Int
 
-    product ProductItem @relation(fields: [productItemId], references: [id])
+    productItem ProductItem @relation(fields: [productItemId], references: [id])
     productItemId Int
 
 
-    quantity Int
+    quantity Int @default(1)
     ingredients Ingredient[]
 
     createAt DateTime @default(now())

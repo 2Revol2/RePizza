@@ -12,7 +12,7 @@ export const updateTotalCartPrice = async (token: string) => {
           createAt: "desc",
         },
         include: {
-          product: {
+          productItem: {
             include: {
               product: true,
             },
@@ -30,7 +30,7 @@ export const updateTotalCartPrice = async (token: string) => {
     return (acc += calcTotalCartPrice(
       item.quantity,
       item.ingredients,
-      item.product.price
+      item.productItem.price
     ));
   }, 0);
 
@@ -47,7 +47,7 @@ export const updateTotalCartPrice = async (token: string) => {
           createAt: "desc",
         },
         include: {
-          product: {
+          productItem: {
             include: {
               product: true,
             },
