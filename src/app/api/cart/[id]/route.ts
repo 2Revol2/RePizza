@@ -1,6 +1,5 @@
 import { prisma } from "@/prisma/prismaClient";
 import { updateTotalCartPrice } from "@/shared/lib/updateTotalCartPrice";
-
 import { NextRequest, NextResponse } from "next/server";
 
 export async function PATCH(
@@ -45,10 +44,10 @@ export async function PATCH(
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ) {
   try {
-    const { id } = params;
+    const { id } = context.params;
     const token = req.cookies.get("cartToken")?.value;
 
     if (!token) {
