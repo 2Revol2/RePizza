@@ -6,14 +6,19 @@ import Link from "next/link";
 import Button from "@/shared/ui/Button/Button";
 import { ArrowRight } from "lucide-react";
 import { CartItem } from "@/entities/CartItem";
-import { useQuery } from "@tanstack/react-query";
-import { getUserCart } from "@/shared/api/cart/api";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  deleteUserCartItem,
+  getUserCart,
+  updateUserCartItem,
+} from "@/shared/api/cart/api";
 import { calcTotalCartPrice } from "@/shared/lib/calcTotalCartPrice";
 import { getCartItemDetails } from "@/shared/lib/getCartItemDetails";
 import { PizzaSize, PizzaType } from "@/shared/constants/pizza";
 
 export const CartDrawer = () => {
   const { isActive, setIsActive } = useToogleDrawerStore();
+  const queryClient = useQueryClient();
 
   const onClose = () => {
     setIsActive(!isActive);
@@ -23,27 +28,57 @@ export const CartDrawer = () => {
     queryKey: ["cart"],
     queryFn: () => getUserCart(),
     select: (DataFromServer) => {
-      return DataFromServer.items.map((item) => ({
-        id: item.id,
-        quantity: item.quantity,
-        name: item.product.product.name,
-        imageUrl: item.product.product.imageUrl,
-        price: calcTotalCartPrice(
-          item.quantity,
-          item.ingredients,
-          item.product.price
-        ),
-        disabled: false,
-        pizzaSize: item.product.size,
-        pizzaType: item.product.pizzaType,
-        ingredients: item.ingredients.map((item) => ({
-          name: item.name,
-          price: item.price,
+      return {
+        totalAmout: DataFromServer.totalAmount,
+        items: DataFromServer.items.map((item) => ({
+          id: item.id,
+          quantity: item.quantity,
+          name: item.product.product.name,
+          imageUrl: item.product.product.imageUrl,
+          price: calcTotalCartPrice(
+            item.quantity,
+            item.ingredients,
+            item.product.price
+          ),
+          disabled: false,
+          pizzaSize: item.product.size,
+          pizzaType: item.product.pizzaType,
+          ingredients: item.ingredients.map((item) => ({
+            name: item.name,
+            price: item.price,
+          })),
         })),
-      }));
+      };
+    },
+  });
+  const updateCartItemQuantity = useMutation({
+    mutationFn: ({ id, quantity }: { id: number; quantity: number }) =>
+      updateUserCartItem(id, quantity),
+
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["cart"] });
     },
   });
 
+  const deleteCartItem = useMutation({
+    mutationFn: ({ id }: { id: number }) => deleteUserCartItem(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["cart"] });
+    },
+  });
+
+  const handleUpdateCartItem = (
+    id: number,
+    quantity: number,
+    type: "plus" | "minus"
+  ) => {
+    const newQuantity = type === "plus" ? quantity + 1 : quantity - 1;
+    updateCartItemQuantity.mutate({ id, quantity: newQuantity });
+  };
+
+const handleDeleteCartItem = (id: number,) => {
+  deleteCartItem.mutate({id})
+}
   return (
     <AntdDrawer
       className={s.drawer}
@@ -56,7 +91,7 @@ export const CartDrawer = () => {
               <span>Итого</span>
               <div className={s.divider} />
             </div>
-            <span>400 ₽</span>
+            <span>{cartData?.totalAmout}</span>
           </div>
           <Link href={"/cart"} className={s.button}>
             <Button className={s.button}>
@@ -66,10 +101,10 @@ export const CartDrawer = () => {
           </Link>
         </div>
       }
-      title={`В корзине ${cartData?.length} товара`}
+      title={`В корзине ${cartData?.items.length} товара`}
     >
       <Flex vertical gap={10}>
-        {cartData?.map((item) => (
+        {cartData?.items.map((item) => (
           <CartItem
             key={item.id}
             imageUrl={item.imageUrl}
@@ -81,6 +116,10 @@ export const CartDrawer = () => {
             name={item.name}
             price={item.price}
             quantity={item.quantity}
+            updateCartItemQuantity={(type) =>
+              handleUpdateCartItem(item.id, item.quantity, type)
+            }
+            handleDeleteCartItem={() => handleDeleteCartItem(item.id)}
           />
         ))}
       </Flex>

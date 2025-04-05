@@ -9,3 +9,7 @@ export type NormalizedCartItem = {
   pizzaType?: number | null;
   ingredients: Array<{ name: string; price: number }>;
 };
+export type CartInfo = {
+  totalAmount: number;
+  items: NormalizedCartItem[];
+};
