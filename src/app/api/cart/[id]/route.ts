@@ -4,10 +4,10 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const id  = (await params).id;
     const data = (await req.json()) as { quantity: number };
     const token = req.cookies.get("cartToken")?.value;
 
@@ -44,10 +44,10 @@ export async function PATCH(
 
 export async function DELETE(
   req: NextRequest,
-  context: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = context.params;
+    const id  = (await params).id;
     const token = req.cookies.get("cartToken")?.value;
 
     if (!token) {
@@ -75,7 +75,6 @@ export async function DELETE(
     return NextResponse.json(updatedUserCart);
   } catch (error) {
     console.log(error);
-
     return NextResponse.json({ message: "Cant delete item" }, { status: 500 });
   }
 }
