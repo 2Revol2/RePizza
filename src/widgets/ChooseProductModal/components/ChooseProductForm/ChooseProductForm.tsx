@@ -4,9 +4,13 @@ import { Title } from "@/shared/ui/Title/Title";
 import Button from "@/shared/ui/Button/Button";
 type ChooseProductFormProps = {
   product: ProductWithRelations;
+  addProduct?: () => void;
 };
 
-export const ChooseProductForm = ({ product }: ChooseProductFormProps) => {
+export const ChooseProductForm = ({
+  product,
+  addProduct,
+}: ChooseProductFormProps) => {
   return (
     <div className={s.wrapper}>
       <div className={s.imageWrapper}>
@@ -23,7 +27,9 @@ export const ChooseProductForm = ({ product }: ChooseProductFormProps) => {
           {product.name}
         </Title>
 
-        <Button className={s.button}>Добавить в корзину {350} ₽</Button>
+        <Button onClick={addProduct} className={s.button}>
+          Добавить в корзину {350} ₽
+        </Button>
       </div>
     </div>
   );

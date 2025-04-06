@@ -19,10 +19,19 @@ import { useAvailablePizzaSizes } from "@/shared/hooks/useAvailablePizzaSizes";
 
 type ChoosePizzaFormProps = {
   product: ProductWithRelations;
+  addPizza: (productId: number, ingredients: number[]) => void;
 };
-export const ChoosePizzaForm = ({ product }: ChoosePizzaFormProps) => {
+export const ChoosePizzaForm = ({
+  product,
+  addPizza,
+}: ChoosePizzaFormProps) => {
   const [size, setSize] = useState<PizzaSize>(20);
   const [type, setType] = useState<PizzaType>(1);
+  
+  const currentItem = product.items.find(
+    (item) => item.size === size && item.pizzaType === type
+  )?.id;
+
   const [selectedIngredients, { toggle: toogleSelectedIngredients }] = useSet(
     new Set<number>([])
   );
@@ -45,7 +54,9 @@ export const ChoosePizzaForm = ({ product }: ChoosePizzaFormProps) => {
   );
 
   const handleAddToCart = () => {
-    console.log({ size, type, selectedIngredients });
+    if(currentItem) {
+      addPizza(currentItem, Array.from(selectedIngredients))
+    }
   };
 
   return (
