@@ -4,11 +4,13 @@ import { Title } from "@/shared/ui/Title/Title";
 import Button from "@/shared/ui/Button/Button";
 type ChooseProductFormProps = {
   product: ProductWithRelations;
+  price: number
   addProduct?: () => void;
 };
 
 export const ChooseProductForm = ({
   product,
+  price,
   addProduct,
 }: ChooseProductFormProps) => {
   return (
@@ -28,7 +30,7 @@ export const ChooseProductForm = ({
         </Title>
 
         <Button onClick={addProduct} className={s.button}>
-          Добавить в корзину {350} ₽
+          Добавить в корзину {price} ₽
         </Button>
       </div>
     </div>

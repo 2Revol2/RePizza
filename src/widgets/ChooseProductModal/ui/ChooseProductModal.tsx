@@ -50,7 +50,11 @@ export const ChooseProductModal = ({ product }: ChooseProductModalProps) => {
       {isPizzaForm ? (
         <ChoosePizzaForm product={product} addPizza={addPizzaToCart} />
       ) : (
-        <ChooseProductForm product={product} addProduct={addProductToCart} />
+        <ChooseProductForm
+          product={product}
+          price={firstProduct.price}
+          addProduct={addProductToCart}
+        />
       )}
     </Modal>
   );
