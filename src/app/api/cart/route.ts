@@ -81,7 +81,7 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    const updatedUserCart = updateTotalCartPrice(token);
+    const updatedUserCart = await updateTotalCartPrice(token);
 
     const response = NextResponse.json(updatedUserCart);
     response.cookies.set("cartToken", token);
