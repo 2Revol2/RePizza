@@ -54,7 +54,7 @@ export const CartButton = () => {
         </Button>
       </div>
       {/* Нарушаем принципы FSD, но я считаю что лучше сделать 1 запрос на сервер в одном месте, чем 2 одинаковых запроса в разных местах*/}
-      <CartDrawer cartData={cartData} />
+      <CartDrawer totalAmount={cartData?.totalAmout} items={cartData?.items} />
     </>
   );
 };

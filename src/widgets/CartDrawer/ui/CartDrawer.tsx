@@ -13,30 +13,14 @@ import {
 } from "@/shared/api/cart/api";
 import { getCartItemDetails } from "@/shared/lib/getCartItemDetails";
 import { PizzaSize, PizzaType } from "@/shared/constants/pizza";
+import { NormalizedCartItem } from "@/shared/types/NormalizedCartItem";
 
 type CartDrawerProps = {
-  cartData:
-    | {
-        totalAmout: number;
-        items: {
-          id: number;
-          quantity: number;
-          name: string;
-          imageUrl: string;
-          price: number;
-          disabled: boolean;
-          pizzaSize: number | null;
-          pizzaType: number | null;
-          ingredients: {
-            name: string;
-            price: number;
-          }[];
-        }[];
-      }
-    | undefined;
+   totalAmount?: number;
+   items?: NormalizedCartItem[];
 };
 
-export const CartDrawer = ({ cartData }: CartDrawerProps) => {
+export const CartDrawer = ({ totalAmount, items }: CartDrawerProps) => {
   const { isActive, setIsActive } = useToogleDrawerStore();
   const queryClient = useQueryClient();
 
@@ -84,7 +68,7 @@ export const CartDrawer = ({ cartData }: CartDrawerProps) => {
               <span>Итого</span>
               <div className={s.divider} />
             </div>
-            <span>{cartData?.totalAmout} ₽</span>
+            <span>{totalAmount} ₽</span>
           </div>
           <Link href={"/cart"} className={s.button}>
             <Button className={s.button}>
@@ -94,10 +78,10 @@ export const CartDrawer = ({ cartData }: CartDrawerProps) => {
           </Link>
         </div>
       }
-      title={`В корзине ${cartData?.items.length} товара`}
+      title={`В корзине ${items?.length} товара`}
     >
       <Flex vertical gap={10}>
-        {cartData?.items.map((item) => (
+        {items?.map((item) => (
           <CartItem
             key={item.id}
             imageUrl={item.imageUrl}
