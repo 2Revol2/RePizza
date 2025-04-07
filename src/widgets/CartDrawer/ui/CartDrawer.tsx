@@ -6,61 +6,28 @@ import Link from "next/link";
 import Button from "@/shared/ui/Button/Button";
 import { ArrowRight } from "lucide-react";
 import { CartItem } from "@/entities/CartItem";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import {
-  deleteUserCartItem,
-  updateUserCartItem,
-} from "@/shared/api/cart/api";
 import { getCartItemDetails } from "@/shared/lib/getCartItemDetails";
 import { PizzaSize, PizzaType } from "@/shared/constants/pizza";
 import { NormalizedCartItem } from "@/shared/types/NormalizedCartItem";
+import { useUpdateCartItemQuantity } from "@/shared/hooks/useUpdateCartItemQuantity";
+import { useDeleteCartItem } from "@/shared/hooks/useDeleteCartItem";
 
 type CartDrawerProps = {
-   totalAmount?: number;
-   items?: NormalizedCartItem[];
+  totalAmount?: number;
+  items?: NormalizedCartItem[];
 };
 
 export const CartDrawer = ({ totalAmount, items }: CartDrawerProps) => {
   const { isActive, setIsActive } = useToogleDrawerStore();
-  const queryClient = useQueryClient();
 
-  const onClose = () => {
-    setIsActive(!isActive);
-  };
+  const handleUpdateCartItem = useUpdateCartItemQuantity();
+  const handleDeleteCartItem = useDeleteCartItem();
 
-  const updateCartItemQuantity = useMutation({
-    mutationFn: ({ id, quantity }: { id: number; quantity: number }) =>
-      updateUserCartItem(id, quantity),
-
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["cart"] });
-    },
-  });
-
-  const deleteCartItem = useMutation({
-    mutationFn: ({ id }: { id: number }) => deleteUserCartItem(id),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["cart"] });
-    },
-  });
-
-  const handleUpdateCartItem = (
-    id: number,
-    quantity: number,
-    type: "plus" | "minus"
-  ) => {
-    const newQuantity = type === "plus" ? quantity + 1 : quantity - 1;
-    updateCartItemQuantity.mutate({ id, quantity: newQuantity });
-  };
-
-  const handleDeleteCartItem = (id: number) => {
-    deleteCartItem.mutate({ id });
-  };
   return (
     <AntdDrawer
       className={s.drawer}
       open={isActive}
-      onClose={onClose}
+      onClose={() => setIsActive(!isActive)}
       footer={
         <div className={s.footer}>
           <div className={s.priceWrapper}>
