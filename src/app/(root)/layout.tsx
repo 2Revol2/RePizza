@@ -3,7 +3,7 @@ import { ConfigProvider } from "antd";
 import { config } from "../providers/AntdConfig";
 import { TanstackProvider } from "../providers/TanstackProvider";
 import "@ant-design/v5-patch-for-react-19";
-
+import  { Toaster } from 'react-hot-toast';
 export default function RootLayout({
   children,
   modal,
@@ -19,6 +19,7 @@ export default function RootLayout({
           <main className="main">
             {children}
             {modal}
+            <Toaster/>
           </main>
         </ConfigProvider>
       </TanstackProvider>

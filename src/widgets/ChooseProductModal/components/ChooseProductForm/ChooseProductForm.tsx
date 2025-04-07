@@ -6,11 +6,13 @@ type ChooseProductFormProps = {
   product: ProductWithRelations;
   price: number
   addProduct?: () => void;
+  loading?: boolean
 };
 
 export const ChooseProductForm = ({
   product,
   price,
+  loading,
   addProduct,
 }: ChooseProductFormProps) => {
   return (
@@ -29,7 +31,7 @@ export const ChooseProductForm = ({
           {product.name}
         </Title>
 
-        <Button onClick={addProduct} className={s.button}>
+        <Button loading={loading} onClick={() => addProduct?.()} className={s.button}>
           Добавить в корзину {price} ₽
         </Button>
       </div>

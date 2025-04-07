@@ -9,7 +9,7 @@ type CartCounterProps = {
 export const CartCounter = ({ value, onClick }: CartCounterProps) => {
   return (
     <Flex align="center" gap={10}>
-      <CountButton type="minus" onClick={() => onClick?.("minus")} />
+      <CountButton  type="minus" onClick={() => onClick?.("minus")} />
       <b>{value}</b>
       <CountButton type="plus" onClick={() => onClick?.("plus")} />
     </Flex>

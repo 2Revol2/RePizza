@@ -19,15 +19,17 @@ import { useAvailablePizzaSizes } from "@/shared/hooks/useAvailablePizzaSizes";
 
 type ChoosePizzaFormProps = {
   product: ProductWithRelations;
-  addPizza: (productId: number, ingredients: number[]) => void;
+  addPizza: (productId: number, ingredients?: number[]) => void;
+  loading?: boolean;
 };
 export const ChoosePizzaForm = ({
   product,
   addPizza,
+  loading,
 }: ChoosePizzaFormProps) => {
   const [size, setSize] = useState<PizzaSize>(20);
   const [type, setType] = useState<PizzaType>(1);
-  
+
   const currentItem = product.items.find(
     (item) => item.size === size && item.pizzaType === type
   )?.id;
@@ -54,8 +56,8 @@ export const ChoosePizzaForm = ({
   );
 
   const handleAddToCart = () => {
-    if(currentItem) {
-      addPizza(currentItem, Array.from(selectedIngredients))
+    if (currentItem) {
+      addPizza(currentItem, Array.from(selectedIngredients));
     }
   };
 
@@ -98,7 +100,7 @@ export const ChoosePizzaForm = ({
             ))}
           </div>
 
-          <Button onClick={handleAddToCart} className={s.button}>
+          <Button loading={loading} onClick={handleAddToCart} className={s.button}>
             Добавить в корзину {totalPrice} ₽
           </Button>
         </Flex>

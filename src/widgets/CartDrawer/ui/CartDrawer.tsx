@@ -6,17 +6,37 @@ import Link from "next/link";
 import Button from "@/shared/ui/Button/Button";
 import { ArrowRight } from "lucide-react";
 import { CartItem } from "@/entities/CartItem";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   deleteUserCartItem,
-  getUserCart,
   updateUserCartItem,
 } from "@/shared/api/cart/api";
-import { calcTotalCartPrice } from "@/shared/lib/calcTotalCartPrice";
 import { getCartItemDetails } from "@/shared/lib/getCartItemDetails";
 import { PizzaSize, PizzaType } from "@/shared/constants/pizza";
 
-export const CartDrawer = () => {
+type CartDrawerProps = {
+  cartData:
+    | {
+        totalAmout: number;
+        items: {
+          id: number;
+          quantity: number;
+          name: string;
+          imageUrl: string;
+          price: number;
+          disabled: boolean;
+          pizzaSize: number | null;
+          pizzaType: number | null;
+          ingredients: {
+            name: string;
+            price: number;
+          }[];
+        }[];
+      }
+    | undefined;
+};
+
+export const CartDrawer = ({ cartData }: CartDrawerProps) => {
   const { isActive, setIsActive } = useToogleDrawerStore();
   const queryClient = useQueryClient();
 
@@ -24,33 +44,6 @@ export const CartDrawer = () => {
     setIsActive(!isActive);
   };
 
-  const { data: cartData } = useQuery({
-    queryKey: ["cart"],
-    queryFn: () => getUserCart(),
-    select: (DataFromServer) => {
-      return {
-        totalAmout: DataFromServer.totalAmount,
-        items: DataFromServer.items.map((item) => ({
-          id: item.id,
-          quantity: item.quantity,
-          name: item.productItem.product.name,
-          imageUrl: item.productItem.product.imageUrl,
-          price: calcTotalCartPrice(
-            item.quantity,
-            item.ingredients,
-            item.productItem.price
-          ),
-          disabled: false,
-          pizzaSize: item.productItem.size,
-          pizzaType: item.productItem.pizzaType,
-          ingredients: item.ingredients.map((item) => ({
-            name: item.name,
-            price: item.price,
-          })),
-        })),
-      };
-    },
-  });
   const updateCartItemQuantity = useMutation({
     mutationFn: ({ id, quantity }: { id: number; quantity: number }) =>
       updateUserCartItem(id, quantity),
@@ -76,9 +69,9 @@ export const CartDrawer = () => {
     updateCartItemQuantity.mutate({ id, quantity: newQuantity });
   };
 
-const handleDeleteCartItem = (id: number,) => {
-  deleteCartItem.mutate({id})
-}
+  const handleDeleteCartItem = (id: number) => {
+    deleteCartItem.mutate({ id });
+  };
   return (
     <AntdDrawer
       className={s.drawer}
@@ -91,7 +84,7 @@ const handleDeleteCartItem = (id: number,) => {
               <span>Итого</span>
               <div className={s.divider} />
             </div>
-            <span>{cartData?.totalAmout}</span>
+            <span>{cartData?.totalAmout} ₽</span>
           </div>
           <Link href={"/cart"} className={s.button}>
             <Button className={s.button}>

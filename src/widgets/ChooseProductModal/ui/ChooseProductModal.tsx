@@ -6,6 +6,7 @@ import { ChooseProductForm } from "../components/ChooseProductForm/ChooseProduct
 import { ChoosePizzaForm } from "../components/ChoosePizzaForm/ChoosePizzaForm";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addUserCartItem } from "@/shared/api/cart/api";
+import toast from "react-hot-toast";
 
 type ChooseProductModalProps = {
   product: ProductWithRelations;
@@ -30,11 +31,16 @@ export const ChooseProductModal = ({ product }: ChooseProductModalProps) => {
     },
   });
 
-  const addProductToCart = () => {
-    addCartItem.mutate({ productItemId: firstProduct.id });
-  };
-  const addPizzaToCart = (productItemId: number, ingredients: number[]) => {
-    addCartItem.mutate({ productItemId, ingredients });
+  const addProduct = (productItemId?: number, ingredients?: number[]) => {
+    try {
+      const itemId = productItemId ?? firstProduct.id;
+      addCartItem.mutate({ productItemId: itemId, ingredients });
+      toast.success("Товар добавлен в корзину");
+      router.back();
+    } catch (error) {
+      console.log(error);
+      toast.error("Не удалось добавить товар в корзину");
+    }
   };
 
   return (
@@ -48,12 +54,17 @@ export const ChooseProductModal = ({ product }: ChooseProductModalProps) => {
       style={{ padding: 0 }}
     >
       {isPizzaForm ? (
-        <ChoosePizzaForm product={product} addPizza={addPizzaToCart} />
+        <ChoosePizzaForm
+          product={product}
+          addPizza={addProduct}
+          loading={addCartItem.isPending}
+        />
       ) : (
         <ChooseProductForm
           product={product}
           price={firstProduct.price}
-          addProduct={addProductToCart}
+          addProduct={addProduct}
+          loading={addCartItem.isPending}
         />
       )}
     </Modal>
