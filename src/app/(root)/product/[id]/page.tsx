@@ -2,8 +2,7 @@ import { prisma } from "@/prisma/prismaClient";
 import Container from "@/shared/ui/Container/Container";
 import { notFound } from "next/navigation";
 import s from "./ProductPage.module.scss";
-import { PizzaImage } from "@/entities/Product";
-import { Title } from "@/shared/ui/Title/Title";
+import { ChooseProduct } from "@/widgets/ChooseProduct";
 
 export default async function ProductPage({
   params,
@@ -26,7 +25,7 @@ export default async function ProductPage({
           },
         },
       },
-      items: true
+      items: true,
     },
   });
 
@@ -36,15 +35,7 @@ export default async function ProductPage({
 
   return (
     <Container className={s.wrapper}>
-      <div className={s.imageWrapper}>
-        <PizzaImage imageUrl={product.imageUrl} size={30} name={product.name} />
-      </div>
-      <div className={s.info}>
-        <Title size="md" Level="h4">
-          {product.name}
-        </Title>
-        <p className={s.desc}>Lorem ipsum dolor sit amet consectetur.</p>
-      </div>
+      <ChooseProduct product={product} />
     </Container>
   );
 }

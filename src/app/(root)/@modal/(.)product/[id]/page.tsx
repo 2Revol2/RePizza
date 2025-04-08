@@ -1,5 +1,5 @@
 import { prisma } from "@/prisma/prismaClient";
-import { ChooseProductModal } from "@/widgets/ChooseProductModal";
+import { ChooseProductModal } from "@/widgets/ChooseProduct";
 import { notFound } from "next/navigation";
 export default async function Modal({
   params,
