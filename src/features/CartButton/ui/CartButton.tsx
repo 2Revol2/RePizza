@@ -43,7 +43,7 @@ export const CartButton = () => {
   return (
     <>
       <div onClick={() => toogleDrawer(true)}>
-        <Button loading={isLoading} className={s.button}>
+        <Button disabled={isLoading} loading={isLoading} className={s.button}>
           <b>{cartData?.totalAmout} ₽</b>
           <span className={s.divider} />
           <Flex className={s.cart} align="center" gap={8}>

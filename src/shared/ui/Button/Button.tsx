@@ -8,7 +8,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   buttonType?: "outline" | "default" | "secondary";
   className?: string;
   loading?: boolean;
-  disabled?: boolean
+  disabled?: boolean;
 }
 
 export default function Button({
@@ -20,8 +20,13 @@ export default function Button({
   onClick,
 }: ButtonProps) {
   return (
-    <button disabled={disabled} onClick={onClick} className={classNames(className, s[buttonType])}>
-      {!loading ? children : <Loader2 className={s.loader} />}
+    <button
+      type="button"
+      disabled={disabled}
+      onClick={onClick}
+      className={classNames(s.button, s[buttonType], className)}
+    >
+      {loading ? <Loader2 className={s.loader} /> : children}
     </button>
   );
 }

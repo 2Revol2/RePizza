@@ -14,5 +14,5 @@ export const useDeleteCartItem = () => {
     deleteCartItem.mutate({ id });
   };
 
-  return handleDeleteCartItem;
+  return {handleDeleteCartItem, loading: deleteCartItem.isPending};
 };

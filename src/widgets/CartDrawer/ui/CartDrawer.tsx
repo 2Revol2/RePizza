@@ -19,9 +19,9 @@ type CartDrawerProps = {
 
 export const CartDrawer = ({ totalAmount, items }: CartDrawerProps) => {
   const { isActive, setIsActive } = useToogleDrawerStore();
-
-  const handleUpdateCartItem = useUpdateCartItemQuantity();
-  const handleDeleteCartItem = useDeleteCartItem();
+  
+  const { handleUpdateCartItem, loading: updateLoading } = useUpdateCartItemQuantity();
+  const { handleDeleteCartItem, loading: deleteLoading } = useDeleteCartItem();
 
   return (
     <AntdDrawer
@@ -38,7 +38,11 @@ export const CartDrawer = ({ totalAmount, items }: CartDrawerProps) => {
             <span>{totalAmount} ₽</span>
           </div>
           <Link href={"/cart"} className={s.button}>
-            <Button className={s.button}>
+            <Button
+              disabled={updateLoading || deleteLoading}
+              loading={updateLoading || deleteLoading}
+              className={s.button}
+            >
               Оформить заказ
               <ArrowRight />
             </Button>

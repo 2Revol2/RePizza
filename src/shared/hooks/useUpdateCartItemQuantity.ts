@@ -22,5 +22,5 @@ export const useUpdateCartItemQuantity = () => {
     updateCartItemQuantity.mutate({ id, quantity: newQuantity });
   };
 
-  return handleUpdateCartItem;
+  return {handleUpdateCartItem, loading: updateCartItemQuantity.isPending};
 };
