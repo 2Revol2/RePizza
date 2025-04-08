@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getAllIngredients } from "@/shared/api/ingredients/api";
 import { LIMIT } from "@/shared/constants/const";
 import { CheckboxFilter } from "@/features/CheckboxFilter";
-import { DOUGH_TYPE, PIZZA_SIZE } from "@/shared/constants/filters";
+import { PIZZA_TYPE, PIZZA_SIZE } from "@/shared/constants/filters";
 import { PriceFilter } from "@/features/PriceFilter";
 import Button from "@/shared/ui/Button/Button";
 import { useFiltersLogic } from "@/shared/hooks/useFiltersLogic";
@@ -15,7 +15,7 @@ export const Filters = () => {
   const {
     showAll,
     searchValue,
-    doughType,
+    pizzaType,
     size,
     ingredients,
     setSearchValue,
@@ -46,9 +46,9 @@ export const Filters = () => {
         Тип теста:
       </Title>
       <CheckboxFilter
-        items={DOUGH_TYPE}
-        type="doughType"
-        checkedValues={doughType}
+        items={PIZZA_TYPE}
+        type="pizzaType"
+        checkedValues={pizzaType}
       />
       <Divider />
 

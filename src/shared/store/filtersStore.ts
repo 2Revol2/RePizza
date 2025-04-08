@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 type State = {
-  doughType: number[];
+  pizzaType: number[];
   size: number[];
   ingredients: number[];
   prices: { priceFrom?: number; priceTo?: number };
@@ -13,7 +13,7 @@ type State = {
 export const useFiltersStore = create<State>()(
   persist(
     (set) => ({
-      doughType: [],
+      pizzaType: [],
       size: [],
       ingredients: [],
       prices: {
@@ -27,7 +27,7 @@ export const useFiltersStore = create<State>()(
         })),
       resetFilters: () => {
         set({
-          doughType: [],
+          pizzaType: [],
           size: [],
           ingredients: [],
           prices: {

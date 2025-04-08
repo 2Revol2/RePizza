@@ -1,4 +1,4 @@
-export const DOUGH_TYPE = [
+export const PIZZA_TYPE = [
   { value: 1, text: "Тонкое" },
   { value: 2, text: "Традиционное" },
 ];

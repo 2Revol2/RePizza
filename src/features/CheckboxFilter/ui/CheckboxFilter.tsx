@@ -3,7 +3,7 @@ import { Checkbox, Flex, GetProp } from "antd";
 
 type CheckboxFilterProps = {
   items: { value: number; text: string }[];
-  type: "size" | "ingredients" | "doughType";
+  type: "size" | "ingredients" | "pizzaType";
   checkedValues?: number[];
 };
 

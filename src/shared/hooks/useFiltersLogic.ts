@@ -6,7 +6,7 @@ export const useFiltersLogic = () => {
   const router = useRouter();
   const [showAll, setShowAll] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-  const { doughType, size, prices, ingredients, resetFilters } =
+  const { pizzaType, size, prices, ingredients, resetFilters } =
     useFiltersStore();
   useEffect(() => {
     const query = qs.stringify(
@@ -14,7 +14,7 @@ export const useFiltersLogic = () => {
         ...prices,
         size: size,
         ingredients: ingredients,
-        doughType: doughType,
+        pizzaType: pizzaType,
       },
       {
         arrayFormat: "comma",
@@ -24,7 +24,7 @@ export const useFiltersLogic = () => {
     router.push(`?${query}`, {
       scroll: false,
     });
-  }, [doughType, size, prices, ingredients]);
+  }, [pizzaType, size, prices, ingredients]);
 
   return {
     showAll,
@@ -32,7 +32,7 @@ export const useFiltersLogic = () => {
     setShowAll,
     setSearchValue,
     resetFilters,
-    doughType,
+    pizzaType,
     size,
     prices,
     ingredients,

@@ -31,9 +31,7 @@ export const ProductCard = ({
             {name}
           </Title>
           <div className={s.desc}>
-            {ingredients.map((item) => (
-              <span key={item.id}>{item.name.toLocaleLowerCase()} </span>
-            ))}
+            {ingredients.map((item) => item.name.toLowerCase()).join(", ")}
           </div>
           <Flex justify="space-between" align="center">
             <span className={s.price}>

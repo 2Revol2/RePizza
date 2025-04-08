@@ -5,19 +5,17 @@ import { Filters } from "@/widgets/Filters";
 import { Flex } from "antd";
 import { ProductList } from "@/widgets/ProductList";
 import { prisma } from "@/prisma/prismaClient";
+import { productFilters } from "@/shared/types/productFilters";
+import { findProductByFilters } from "@/shared/lib/findProductByFilters";
 
-
-export default async function Home() {
-  const categories = await prisma.category.findMany({
-    include: {
-      products: {
-        include: {
-          ingredients: true,
-          items: true,
-        },
-      },
-    },
-  });
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<productFilters>;
+}) {
+  const searchParamsValue = await searchParams;
+  
+  const categories = await findProductByFilters(searchParamsValue);
 
   return (
     <>
