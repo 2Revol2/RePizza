@@ -15,16 +15,17 @@ import Image from "next/image";
 import { Title } from "@/shared/ui/Title/Title";
 
 type CartDrawerProps = {
-  totalAmount: number;
+  totalAmount?: number;
   items?: NormalizedCartItem[];
 };
 
 export const CartDrawer = ({ totalAmount, items }: CartDrawerProps) => {
   const { isActive, setIsActive } = useToogleDrawerStore();
-
+  const isNotEmptyCart = totalAmount ? true : false
   const { handleUpdateCartItem, loading: updateLoading } =
     useUpdateCartItemQuantity();
   const { handleDeleteCartItem, loading: deleteLoading } = useDeleteCartItem();
+
 
   return (
     <AntdDrawer
@@ -32,7 +33,7 @@ export const CartDrawer = ({ totalAmount, items }: CartDrawerProps) => {
       open={isActive}
       onClose={() => setIsActive(!isActive)}
       footer={
-        totalAmount > 0 && (
+        isNotEmptyCart && (
           <div className={s.footer}>
             <div className={s.priceWrapper}>
               <div className={s.price}>
@@ -54,9 +55,9 @@ export const CartDrawer = ({ totalAmount, items }: CartDrawerProps) => {
           </div>
         )
       }
-      title={totalAmount > 0 && `В корзине ${items?.length} товара`}
+      title={isNotEmptyCart  && `В корзине ${items?.length} товара`}
     >
-      {!totalAmount && (
+      {!isNotEmptyCart && (
         <Flex align="center" vertical justify="center" style={{height: '90%'}}>
           <Image
             src={"/assets/empty-box.png"}
@@ -75,7 +76,7 @@ export const CartDrawer = ({ totalAmount, items }: CartDrawerProps) => {
         </Flex>
       )}
 
-      {totalAmount > 0 && (
+      {isNotEmptyCart && (
         <Flex vertical gap={10}>
           {items?.map((item) => (
             <CartItem
