@@ -42,7 +42,7 @@ export const CartDrawer = ({ totalAmount, items }: CartDrawerProps) => {
               </div>
               <span>{totalAmount} ₽</span>
             </div>
-            <Link href={"/cart"} className={s.button}>
+            <Link href={"/checkout"} className={s.button}>
               <Button
                 disabled={updateLoading || deleteLoading}
                 loading={updateLoading || deleteLoading}

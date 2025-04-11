@@ -1,9 +1,7 @@
 import { Header } from "@/widgets/Header";
-import { ConfigProvider } from "antd";
-import { config } from "../providers/AntdConfig";
 import { TanstackProvider } from "../providers/TanstackProvider";
 import "@ant-design/v5-patch-for-react-19";
-import  { Toaster } from 'react-hot-toast';
+import { Toaster } from "react-hot-toast";
 export default function RootLayout({
   children,
   modal,
@@ -14,14 +12,12 @@ export default function RootLayout({
   return (
     <>
       <TanstackProvider>
-        <ConfigProvider theme={config}>
-          <Header />
-          <main className="main">
-            {children}
-            {modal}
-            <Toaster/>
-          </main>
-        </ConfigProvider>
+        <Header />
+        <main className="main">
+          {children}
+          {modal}
+          <Toaster />
+        </main>
       </TanstackProvider>
     </>
   );

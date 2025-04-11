@@ -18,3 +18,7 @@ html {
 .ant-modal-content {
   padding: 0 !important;
 }
+.checkout__page {
+  background-color: #f4f1ee;
+  min-height: 100vh;
+}

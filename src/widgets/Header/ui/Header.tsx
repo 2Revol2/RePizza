@@ -8,7 +8,15 @@ import { CartButton } from "@/features/CartButton";
 import Button from "@/shared/ui/Button/Button";
 import { User } from "lucide-react";
 
-export const Header = () => {
+type HeaderProps = {
+  showSearch?: boolean;
+  showCartButton?: boolean;
+};
+
+export const Header = ({
+  showSearch = true,
+  showCartButton = true,
+}: HeaderProps) => {
   return (
     <header className={s.header}>
       <Container className={s.container}>
@@ -23,16 +31,20 @@ export const Header = () => {
           </Flex>
         </Link>
         {/* Поиск */}
-        <Flex flex={1}>
-          <Search />
-        </Flex>
+        {showSearch && (
+          <Flex flex={1}>
+            <Search />
+          </Flex>
+        )}
+
         {/* Правая часть */}
         <Flex align="center" gap={"12px"}>
           <Button buttonType="outline">
             <User size={16} />
             Войти
           </Button>
-          <CartButton />
+
+          {showCartButton && <CartButton />}
         </Flex>
       </Container>
     </header>

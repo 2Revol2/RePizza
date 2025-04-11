@@ -1,0 +1,11 @@
+.input {
+  outline: none;
+  border: .0625rem solid #efefef;
+  padding: .8125rem;
+  size: 1rem;
+  border-radius: .625rem;
+  width: 100%;
+  &:focus {
+    border-color:#0084FE ;
+  }
+}
